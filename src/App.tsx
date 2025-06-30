@@ -1,12 +1,24 @@
+import { Toaster } from 'sonner'
 import './App.css'
-import { Button } from './components/ui/button'
-
+import AxiosInterceptor from './interceptors/AxiosInterceptors'
+import AppRouter from './routes/AppRouter'
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import { TooltipProvider } from '@radix-ui/react-tooltip'
+import { MantineProvider } from '@mantine/core'
 function App() {
-
+  const queryClient = new QueryClient()
   return (
-    <Button variant={'default'} className='bg-blue-600'>
-      <div>Hello Relatika World!</div>
-    </Button>
+    <AxiosInterceptor>
+      <QueryClientProvider client={queryClient}>
+        <MantineProvider>
+          <AppRouter />
+        </MantineProvider>
+        <Toaster richColors />
+      </QueryClientProvider>
+    </AxiosInterceptor>
   )
 }
 
