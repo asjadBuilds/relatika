@@ -126,3 +126,8 @@ body{
 ::-webkit-scrollbar{
   display: none;
 }
+
+.bg-background, .bg-background:active{
+  background:none !important;
+  border: none !important;
+}

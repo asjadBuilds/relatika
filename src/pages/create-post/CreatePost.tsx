@@ -32,9 +32,10 @@ import SubScript from '@tiptap/extension-subscript';
 import { Button } from "@mantine/core";
 import { createPost } from "@/api/postApi";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 type createPostForm = z.infer<typeof schema>;
 const CreatePost = () => {
+  const params = useParams();
   const navigate = useNavigate();
   const { data: userSpaces } = useQuery<Space[]>({
     queryKey: ['getUserSpaces'],
@@ -107,12 +108,12 @@ const CreatePost = () => {
           <SelectContent>
             <SelectItem value="0">Select Space</SelectItem>
             {userSpaces?.map((space: any, index: any) => (
-              <SelectItem key={index} value={space?.spaceId._id} className="flex gap-3 items-center p-4">
+              <SelectItem disabled={params?.spaceName !== space?.name} key={index} value={space?._id} className="flex gap-3 items-center p-4">
                 <Avatar>
-                  <AvatarImage src={space?.spaceId?.avatar} className="w-6" />
+                  <AvatarImage src={space?.avatar} className="w-6" />
                   <AvatarFallback>S</AvatarFallback>
                 </Avatar>
-                <span className="text-sm">{space?.spaceId.name}</span>
+                <span className="text-sm">{space?.name}</span>
               </SelectItem>
             ))}
           </SelectContent>

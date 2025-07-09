@@ -14,5 +14,12 @@ export const CONFIG = {
     getSpaceById: `${BASE_URL}/api/space/getSpaceById`,
     addVote: `${BASE_URL}/api/post/addVote`,
     getCommentsByPost: `${BASE_URL}/api/post/getCommentsByPost`,
-    addComment: `${BASE_URL}/api/post/addComment`
+    addComment: `${BASE_URL}/api/post/addComment`,
+    createSpace: `${BASE_URL}/api/space/createSpace`,
+    logoutUser: `${BASE_URL}/api/auth/logoutUser`,
+    getPostsBySpaceId: `${BASE_URL}/api/post/getPostsBySpaceId`,
+    getSpaceByQuery: `${BASE_URL}/api/space/getSpaceByQuery`,
+    leaveSpace: `${BASE_URL}/api/space/leaveSpace`,
+    getUserPosts: `${BASE_URL}/api/user/getUserPosts`,
+    getUserComments: `${BASE_URL}/api/user/getUserComments`
 }

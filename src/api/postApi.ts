@@ -17,6 +17,17 @@ const fetchPaginatedPosts = async ( pageParam : any) => {
   return res.json();
 };
 
+const fetchSpacePosts = async ( pageParam : any, spaceId:any) => {
+  const limit = 5;
+  const url = pageParam
+    ? `${BASE_URL}/api/post/getPostsBySpaceId/${spaceId}?limit=${limit}&cursor=${pageParam}`
+    : `${BASE_URL}/api/post/getPostsBySpaceId/${spaceId}?limit=${limit}`;
+
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("Failed to fetch posts");
+  return res.json();
+};
+
 const addVote = async({ value, postId }: { value: number; postId: string })=>{
   const res = await axiosInstance.post(`${CONFIG.addVote}/${postId}`,{value});
      return res.data;
@@ -35,5 +46,6 @@ export {
     fetchPaginatedPosts,
     addVote,
     getCommentsByPost,
-    addComment
+    addComment,
+    fetchSpacePosts
 }

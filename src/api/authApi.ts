@@ -9,7 +9,12 @@ const loginUser = async (formObj:any):Promise<any>=>{
      const res = await axiosInstance.post(CONFIG.loginUser, { ...formObj });
      return res.data;
 }
+const logout = async ():Promise<any>=>{
+     const res = await axiosInstance.post(CONFIG.logoutUser);
+     return res.data;
+}
 export {
      createUser,
-     loginUser
+     loginUser,
+     logout
 }

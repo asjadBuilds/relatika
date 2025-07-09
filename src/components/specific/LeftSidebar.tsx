@@ -51,20 +51,20 @@ const LeftSidebar = () => {
         <AccordionItem value="item-1">
           <AccordionTrigger className="hover:no-underline uppercase tracking-widest font-normal text-neutral-300">Spaces</AccordionTrigger>
           <AccordionContent>
-            <Link to={'/'}>
+            <Link to={'/space/new'}>
               <button className="flex gap-3 items-center text-2xl w-full p-4 hover:bg-neutral-700 transition-colors duration-200 rounded-md">
                 <AiOutlinePlusSquare />
                 <span className="text-sm">Create Community</span>
               </button>
             </Link>
-            {userSpaces?.map((space: any, index: any) => (
-              <Link to={'/'} key={index}>
+            {userSpaces?.map((space: Space, index: any) => (
+              <Link to={`/space/${space._id}`} key={index} state={{space}}>
                 <button className="flex gap-3 items-center text-2xl w-full p-4 hover:bg-neutral-700 transition-colors duration-200 rounded-md">
                   <Avatar>
-                    <AvatarImage src={space?.spaceId?.avatar} />
+                    <AvatarImage src={space?.avatar} />
                     <AvatarFallback>S</AvatarFallback>
                   </Avatar>
-                  <span className="text-sm">{space?.spaceId.name}</span>
+                  <span className="text-sm">{space?.name}</span>
                 </button>
               </Link>
             ))}

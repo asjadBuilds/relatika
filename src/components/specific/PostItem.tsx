@@ -1,27 +1,22 @@
-import { useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"
 import { TiArrowUpOutline } from "react-icons/ti";
 import { TiArrowDownOutline } from "react-icons/ti";
 import { HiOutlineSave } from "react-icons/hi";
 import { FaRegCommentDots } from "react-icons/fa";
+import moment from 'moment';
 import {
     HoverCard,
     HoverCardContent,
     HoverCardTrigger,
 } from "@/components/ui/hover-card"
 import { Separator } from "@/components/ui/separator";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getSpaceById } from "@/api/spaceApi";
-import moment from "moment";
-import { addComment, addVote, getCommentsByPost } from "@/api/postApi";
-import { useEffect, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import CommentItem from "@/components/specific/CommentItem";
-const PostDetails = () => {
-    const { state } = useLocation();
-    const post = state?.post;
-    const queryClient = useQueryClient();
-    const [commentMsg, setCommentMsg] = useState('');
+import { addVote } from "@/api/postApi";
+import { Post } from "@/models/types";
+const PostItem = ({ post }: { post: Post }) => {
+    const queryClient = useQueryClient()
+    const navigate = useNavigate();
     const {
         mutate,
         data
@@ -32,24 +27,24 @@ const PostDetails = () => {
         mutationKey: ['addVote'],
         mutationFn: addVote,
     })
-    const { data: postComments } = useQuery({
-        queryKey: ['fetchComments'],
-        queryFn: ()=>getCommentsByPost(post._id)
-    })
-    console.log(postComments)
-    const { mutate: addCommentOnPost } = useMutation({
-        mutationFn: addComment,
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['fetchComments'] })
-            setCommentMsg('');
-        }
-    })
     const addVoteHandler = ({ value, postId }: any) => {
         voteMutate({ value, postId })
         queryClient.invalidateQueries({ queryKey: ['posts'] })
     }
+    const handleCommentClick = (e: any) => {
+        e.stopPropagation()
+        navigate(`details/${post?._id}`, { state: { post } })
+    }
+    const navigateToSpaceFront = (e:any) => {
+        e.stopPropagation()
+        navigate(`/space/${post?.spaceId._id}`, {state: {space:post?.spaceId}})
+    }
+    const goToUserProfile = (e:any)=>{
+        e.stopPropagation()
+        navigate(`/${post?.author?.username}`,{state:{user:post?.author}})
+    }
     return (
-        <div className="flex flex-col text-white">
+        <Link to={`/details/${post?._id}`} state={{ post }}>
             <div className="flex flex-col justify-start gap-3 p-2 m-2 rounded-lg hover:bg-neutral-800 transition-colors duration-200">
                 <div className="flex items-center gap-1">
                     <img src={post?.spaceId?.avatar} alt="" className="w-6" />
@@ -62,7 +57,7 @@ const PostDetails = () => {
                                 <div className="flex flex-col justify-start gap-2">
                                     <div className="flex items-center gap-1">
                                         <img src={post?.spaceId?.avatar} alt="" className="w-6" />
-                                        <h2 className="text-base font-bold underline text-white">{post?.spaceId?.name}</h2>
+                                        <h2 onClick={(e) => navigateToSpaceFront(e)} className="text-base font-bold underline text-white cursor-pointer">{post?.spaceId?.name}</h2>
                                     </div>
                                     <p className="text-xs text-neutral-400">{post?.spaceId?.description}</p>
                                     <Separator className="bg-neutral-600" />
@@ -81,7 +76,7 @@ const PostDetails = () => {
                                 <div className="flex flex-col justify-start gap-1">
                                     <div className="flex items-center gap-1">
                                         <div dangerouslySetInnerHTML={{ __html: post?.author?.avatar }} className="w-6"></div>
-                                        <h2 className="text-white text-base underline font-bold">{post?.author?.username}</h2>
+                                        <h2 onClick={(e)=> goToUserProfile(e)} className="text-white text-base underline font-bold">{post?.author?.username}</h2>
                                     </div>
                                     <div className="flex items-center gap-1">
                                         <span className="text-white">Bio:</span>
@@ -111,7 +106,7 @@ const PostDetails = () => {
                             {post?.downvoteCount || ''}
                         </div>
                     </div>
-                    <div className="flex items-center p-2 rounded-full bg-neutral-700 hover:bg-neutral-600 transition-colors duration-200">
+                    <div onClick={(e) => handleCommentClick(e)} className="flex items-center p-2 rounded-full bg-neutral-700 hover:bg-neutral-600 transition-colors duration-200">
                         <FaRegCommentDots />
                         {post?.commentCount || ''}
                     </div>
@@ -120,18 +115,9 @@ const PostDetails = () => {
                     </div>
                 </div>
             </div>
-            <div className="flex items-center gap-2 justify-center">
-                <Input className="w-[80%]" onChange={(e) => setCommentMsg(e.target.value)} />
-                <Button className="bg-blue-500 hover:bg-blue-600 font-medium" onClick={() => addCommentOnPost({ content: commentMsg, postId: post?._id, parentId: '' })}>Add Comment</Button>
-            </div>
-            <div className="mt-3 p-3">
-                <h2 className="text-lg font-semibold">Comments</h2>
-                {postComments?.data?.map((comment: any, index: any) => (
-                    <CommentItem comment={comment} key={index} postId={comment?.postId}/>
-                ))}
-            </div>
-        </div>
+            <Separator className="bg-neutral-700" />
+        </Link>
     )
 }
 
-export default PostDetails
+export default PostItem
