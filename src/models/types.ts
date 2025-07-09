@@ -23,3 +23,19 @@ export type Post = {
     updatedAt:String,
     __v:Number,
 }
+
+export type SendMessageParams = {
+  sender: string;
+  conversationId: string;
+  content: string;
+};
+
+export type Message = {
+  _id: string;
+  sender: {
+    _id: string;
+    name: string;
+  };
+  content: string;
+  sentAt: string;
+};

@@ -131,3 +131,8 @@ body{
   background:none !important;
   border: none !important;
 }
+
+.chat-background{
+  background: #004b6b;
+background: linear-gradient(45deg, rgba(0, 75, 107, 1) 0%, rgba(87, 190, 199, 1) 50%, rgba(48, 33, 191, 1) 100%);
+}

@@ -21,5 +21,9 @@ export const CONFIG = {
     getSpaceByQuery: `${BASE_URL}/api/space/getSpaceByQuery`,
     leaveSpace: `${BASE_URL}/api/space/leaveSpace`,
     getUserPosts: `${BASE_URL}/api/user/getUserPosts`,
-    getUserComments: `${BASE_URL}/api/user/getUserComments`
+    getUserComments: `${BASE_URL}/api/user/getUserComments`,
+    getUserConversations: `${BASE_URL}/api/chat/getConversations`,
+    getMessagesByConversation: `${BASE_URL}/api/chat/getMessages`,
+    sendMessage: `${BASE_URL}/api/chat/sendMessage`,
+    getSingleConversation: `${BASE_URL}/api/chat/getSingleConversation`
 }

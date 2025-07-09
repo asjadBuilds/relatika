@@ -2,11 +2,11 @@ import { Post } from "@/models/types";
 import axiosInstance from "../../axiosInstance";
 import { CONFIG } from "../../config";
 
-const getUserPosts = (): Promise<Post[]> => 
-  axiosInstance.get(CONFIG.getUserPosts).then(res => res.data.data);
+const getUserPosts = (userId:string): Promise<Post[]> => 
+  axiosInstance.post(CONFIG.getUserPosts,{userId}).then(res => res.data.data);
 
-const getUserComments = (): Promise<Post[]> => 
-  axiosInstance.get(CONFIG.getUserComments).then(res => res.data.data);
+const getUserComments = (userId:string): Promise<Post[]> => 
+  axiosInstance.post(CONFIG.getUserComments,{userId}).then(res => res.data.data);
 
 export {
     getUserPosts,

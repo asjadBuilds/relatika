@@ -21,7 +21,7 @@ const LeftSidebar = () => {
     queryFn: getUserSpaces,
   })
   return (
-    <div className="flex flex-col items-start text-white p-2 *:w-full max-h-screen overflow-y-auto styled-scrollbars">
+    <div className="flex flex-col items-start text-white p-2 *:w-full overflow-y-auto styled-scrollbars">
       <Link to={'/'}>
         <button className="flex gap-3 items-center text-2xl w-full p-4 hover:bg-neutral-700 transition-colors duration-200 rounded-md">
           <FaHome />

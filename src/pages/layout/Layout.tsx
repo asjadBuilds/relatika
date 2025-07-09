@@ -22,7 +22,7 @@ const Layout = () => {
     return (
         <div className="flex flex-col bg-neutral-900">
             <Header setCollapseHandler={setCollapseHandler}/>
-            <div className="flex h-screen">
+            <div className="flex h-[calc(100vh-66px)]">
                 <aside className={`${collapse ? 'w-0':'w-1/5'} transition-all duration-300 ease-in-out border-r border-solid border-neutral-400`}>
                 <LeftSidebar/>
                 </aside>

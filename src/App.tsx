@@ -6,7 +6,6 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import { TooltipProvider } from '@radix-ui/react-tooltip'
 import { MantineProvider } from '@mantine/core'
 function App() {
   const queryClient = new QueryClient()

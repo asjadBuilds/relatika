@@ -55,7 +55,7 @@ const Header = ({ setCollapseHandler }: { setCollapseHandler: () => void }) => {
         }
     }
     return (
-        <div className="flex items-center justify-between w-full text-white p-2 border-b border-solid border-neutral-400 sticky top-0 bg-neutral-900">
+        <div className="flex items-center justify-between w-full text-white p-2 border-b border-solid border-neutral-400 sticky z-10 top-0 bg-neutral-900">
             <div className="flex items-center gap-1">
                 <div className='hover:bg-neutral-700 p-3 rounded-full transition-colors duration-150 cursor-pointer' onClick={setCollapseHandler}>
                     <LuListCollapse size={25} />
