@@ -13,7 +13,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getSpaceById } from "@/api/spaceApi";
 import moment from "moment";
 import { addComment, addVote, getCommentsByPost } from "@/api/postApi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import CommentItem from "@/components/specific/CommentItem";

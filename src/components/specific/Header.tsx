@@ -32,7 +32,7 @@ import { logout } from '@/api/authApi';
 import { toast } from 'sonner';
 import { useLoginStatus } from '@/context/LoginStatusContext';
 import { setUser } from '@/context/reducers/userSlice';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 const Header = ({ setCollapseHandler }: { setCollapseHandler: () => void }) => {
     const userDetails = useSelector((state: any) => state.user.value);
     const [search, setSearch] = useState('');

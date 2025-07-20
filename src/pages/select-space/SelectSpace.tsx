@@ -82,7 +82,7 @@ const SelectSpace = () => {
               <img src={space.avatar}  className="w-12 h-12 rounded-full mr-2" />
               <div className="flex flex-col">
                 <span className="font-semibold text-sm">{space.name}</span>
-                <span className="text-gray-500 text-xs">{space.tagline}</span>
+                {/* <span className="text-gray-500 text-xs">{space.tagline}</span> */}
               </div>
               </div>
               <Button variant={joinedSpaces.includes(space._id) ? "secondary" : "default"} className={`ml-auto bg-blue-500 text-white text-xs hover:bg-blue-600 transition-colors duration-150 ${joinedSpaces.includes(space._id) ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={() => handleJoinSpace(space._id)} >
