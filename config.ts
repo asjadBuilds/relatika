@@ -1,6 +1,6 @@
 
 
-export const BASE_URL = 'http://localhost:5000'
+export const BASE_URL = 'https://relatika-backend.onrender.com'
 
 export const CONFIG = {
     createUser : `${BASE_URL}/api/auth/signUp`,
